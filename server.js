@@ -1,10 +1,5 @@
 const http = require('http');
-
-const tasks = [
-    {id:1,description: 'hacer las compras', completed: false},
-    {id:2,description: 'limpiar la casa', completed: false},
-    {id:3,description: 'hacer ejercicio', completed: false}
-]
+const { tasks } = require('./app');
 
 const server = http.createServer((req,res) => {
     if (req.url === '/tasks' && req.method === 'GET') {

@@ -172,3 +172,5 @@ async function processMainMenu () {
 }
 
 processMainMenu();
+
+module.exports = { tasks };
