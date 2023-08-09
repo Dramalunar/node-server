@@ -1,19 +1,25 @@
-const http = require('http');
-const { tasks } = require('./app');
+const express = require("express");
+const { tasks } = require('./index.js');
+const bodyParser = require("body-parser")
 
-const server = http.createServer((req,res) => {
-    if (req.url === '/tasks' && req.method === 'GET') {
-        res.setHeader('Content-Type', 'application/json');
-        res.statusCode = 200;
-        res.end(JSON.stringify(tasks));
-    } else {
-        res.statusCode = 404;
-        res.end();
-    }
-});
 
-const port = 3001;
+const app = express();
 
-server.listen(port,() => {
-    console.log(`Servidor iniciado en http://localhost:${port}`)
+
+app.use(bodyParser.json())
+
+const editRouter = require("./routers/list-edit-router.js")
+const viewRouter = require("./routers/list-view-router.js")
+
+app.get("/tasks", (req,res) => {
+    res.json(tasks)
+})
+
+app.use("/view-task",viewRouter);
+app.use("/edit-task",editRouter);
+
+
+app.listen(3000,() => {
+    console.log(" ")
+    console.log("el servidor escucha",3000)
 })
