@@ -6,6 +6,15 @@ const bodyParser = require("body-parser")
 const app = express();
 
 
+const validateHttpsMethods = (req,res,next) =>{
+    const validateHttps = ['GET','PUT','POST','PATCH','DELETE']
+    if(!validateHttps.includes(req.method)){
+        return res.status(400).json({error:"Metodo Http invalido"})
+    }
+    next();
+}
+
+app.use(validateHttpsMethods);
 app.use(bodyParser.json())
 
 const editRouter = require("./routers/list-edit-router.js")

@@ -98,12 +98,15 @@ return new Promise(async(resolve, reject) => {
   })
    
   if (index >= 0 && index <= tasks.length) {
-     const descripcion = await new Promise((innerResolve) =>{
+     const description = await new Promise((innerResolve) =>{
       rl.question("Ingresa tu nueva descripcion: ",(description)=>{
         innerResolve(description)
       })
      })
-      const response = await axios.put(`http://localhost:3000/edit-task/update-task/${index}/${descripcion}`)
+      const response = await axios.put(`http://localhost:3000/edit-task/update-task`,{
+        index:index,
+        description:description,
+      })
 
       console.log("tarea editada correctamente perro",response.data);
       }else{
