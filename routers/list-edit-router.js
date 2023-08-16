@@ -24,7 +24,7 @@ const handleValidationErrors = (req, res, next) => {
 editRouter.use(handleValidationErrors);
 
 editRouter.post("/create-task", (req, res) => {
-  const { description } = req.body;
+  const { description } = req.body
   const newTask = {
     description,
     completed: false,
@@ -41,7 +41,7 @@ editRouter.delete("/delete-task/:index", (req, res) => {
       .status(200)
       .json({ message: `Tarea ${index + 1} eliminada correctamente` });
   } else {
-    res.status(400).json({ error: `Tarea ${index} no encontrada` });
+    res.status(404).json({ error: `Tarea ${index} no encontrada` });
   }
 });
 
@@ -53,7 +53,7 @@ editRouter.put("/update-task", (req, res) => {
     tasks[index].description = description;
     res.status(200).json({ message: `Tarea ${index+1} editada correctamente` });
   } else {
-    res.status(400).json({ error: `Tarea ${index+1} no encontrada` });
+    res.status(404).json({ error: `Tarea ${index+1} no encontrada` });
   }
 });
 
